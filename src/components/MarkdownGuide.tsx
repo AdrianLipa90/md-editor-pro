@@ -1,3 +1,5 @@
+//src/components/MarkdownGuide.tsx
+
 import React from 'react';
 import { X, Hash, Bold, Link, List, Code, Table, Calculator } from 'lucide-react';
 
@@ -53,16 +55,19 @@ const MarkdownGuide: React.FC<MarkdownGuideProps> = ({ isOpen, onClose }) => {
       description: 'Write mathematical equations using LaTeX syntax with KaTeX.'
     },
     {
-      title: 'PlantUML Diagrams',
-      icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><line x1="9" y1="9" x2="15" y2="15" /><line x1="15" y1="9" x2="9" y2="15" /></svg>,
-      syntax: '```plantuml\n@startuml\nAlice -> Bob: Hello!\nBob --> Alice: Hi there!\n@enduml\n```',
-      description: 'Create UML diagrams, flowcharts, and other diagrams using PlantUML syntax.'
+      title: 'Mermaid Diagrams',
+      icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>,
+      syntax: '```mermaid\ngraph TD\n  A[Start] --> B{Decision}\n  B -->|Yes| C[End]\n  B -->|No| D[Repeat]\n```',
+      description: 'Create diagrams and flowcharts rendered directly in the browser.'
     }
   ];
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={onClose}>
+      <div
+        className="bg-white dark:bg-[#161b22] rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+        onClick={e => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 flex items-center justify-between">
           <div>
@@ -82,8 +87,8 @@ const MarkdownGuide: React.FC<MarkdownGuideProps> = ({ isOpen, onClose }) => {
           <div className="p-6">
             {/* Introduction */}
             <div className="mb-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">What is Markdown?</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-[#e6edf3] mb-3">What is Markdown?</h3>
+              <p className="text-gray-600 dark:text-[#8d96a0] leading-relaxed">
                 Markdown is a lightweight markup language that allows you to format text using simple,
                 readable syntax. It's widely used for documentation, README files, and content creation
                 because it's easy to write and converts beautifully to HTML.
@@ -93,16 +98,16 @@ const MarkdownGuide: React.FC<MarkdownGuideProps> = ({ isOpen, onClose }) => {
             {/* Examples Grid */}
             <div className="grid gap-6 md:grid-cols-2">
               {examples.map((example, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
-                  <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                <div key={index} className="border border-gray-200 dark:border-[#30363d] rounded-lg overflow-hidden">
+                  <div className="bg-gray-50 dark:bg-[#21262d] px-4 py-3 border-b border-gray-200 dark:border-[#30363d]">
                     <div className="flex items-center space-x-2">
-                      <div className="text-blue-600">{example.icon}</div>
-                      <h4 className="font-semibold text-gray-900">{example.title}</h4>
+                      <div className="text-blue-600 dark:text-[#58a6ff]">{example.icon}</div>
+                      <h4 className="font-semibold text-gray-900 dark:text-[#e6edf3]">{example.title}</h4>
                     </div>
-                    <p className="text-sm text-gray-600 mt-1">{example.description}</p>
+                    <p className="text-sm text-gray-600 dark:text-[#8d96a0] mt-1">{example.description}</p>
                   </div>
-                  <div className="p-4">
-                    <div className="bg-gray-900 rounded-lg p-3 overflow-x-auto">
+                  <div className="p-4 dark:bg-[#161b22]">
+                    <div className="bg-gray-900 dark:bg-[#0d1117] rounded-lg p-3 overflow-x-auto">
                       <pre className="text-sm text-gray-100 font-mono whitespace-pre-wrap">
                         {example.syntax}
                       </pre>
@@ -113,9 +118,9 @@ const MarkdownGuide: React.FC<MarkdownGuideProps> = ({ isOpen, onClose }) => {
             </div>
 
             {/* Additional Tips */}
-            <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-blue-900 mb-3">Pro Tips</h3>
-              <ul className="space-y-2 text-blue-800">
+            <div className="mt-8 bg-blue-50 dark:bg-[#0d1b2e] border border-blue-200 dark:border-[#1f4c7a] rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-blue-900 dark:text-[#79c0ff] mb-3">Pro Tips</h3>
+              <ul className="space-y-2 text-blue-800 dark:text-[#a5c9ea]">
                 <li className="flex items-start">
                   <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                   <span>Use two spaces at the end of a line to create a line break</span>
@@ -138,30 +143,30 @@ const MarkdownGuide: React.FC<MarkdownGuideProps> = ({ isOpen, onClose }) => {
                 </li>
                 <li className="flex items-start">
                   <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  <span>PlantUML diagrams: Use ```plantuml code blocks for UML diagrams</span>
+                  <span>Mermaid diagrams: Use ```mermaid code blocks for flowcharts and UML</span>
                 </li>
               </ul>
             </div>
 
             {/* Quick Reference */}
             <div className="mt-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Reference</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-[#e6edf3] mb-4">Quick Reference</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div className="space-y-1">
-                  <p className="font-medium text-gray-700">Emphasis</p>
-                  <p className="text-gray-600 font-mono">*italic* **bold**</p>
+                  <p className="font-medium text-gray-700 dark:text-[#e6edf3]">Emphasis</p>
+                  <p className="text-gray-600 dark:text-[#8d96a0] font-mono">*italic* **bold**</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="font-medium text-gray-700">Code</p>
-                  <p className="text-gray-600 font-mono">`code` ```block```</p>
+                  <p className="font-medium text-gray-700 dark:text-[#e6edf3]">Code</p>
+                  <p className="text-gray-600 dark:text-[#8d96a0] font-mono">`code` ```block```</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="font-medium text-gray-700">Math</p>
-                  <p className="text-gray-600 font-mono">$inline$ $$block$$</p>
+                  <p className="font-medium text-gray-700 dark:text-[#e6edf3]">Math</p>
+                  <p className="text-gray-600 dark:text-[#8d96a0] font-mono">$inline$ $$block$$</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="font-medium text-gray-700">Diagrams</p>
-                  <p className="text-gray-600 font-mono">```plantuml</p>
+                  <p className="font-medium text-gray-700 dark:text-[#e6edf3]">Diagrams</p>
+                  <p className="text-gray-600 dark:text-[#8d96a0] font-mono">```mermaid</p>
                 </div>
               </div>
             </div>
@@ -169,15 +174,15 @@ const MarkdownGuide: React.FC<MarkdownGuideProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Footer */}
-        <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
+        <div className="bg-gray-50 dark:bg-[#21262d] px-6 py-4 border-t border-gray-200 dark:border-[#30363d]">
           <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-[#8d96a0]">
               Need more help? Check out the{' '}
               <a
                 href="https://www.markdownguide.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 underline"
+                className="text-blue-600 hover:text-blue-800 dark:text-[#58a6ff] dark:hover:text-[#79c0ff] underline"
               >
                 official Markdown guide
               </a>

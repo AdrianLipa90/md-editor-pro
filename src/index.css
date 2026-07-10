@@ -1,26 +1,28 @@
+/* src/index.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Custom styles for markdown content */
 .markdown-content {
-  @apply text-gray-800;
+  @apply text-gray-800 dark:text-[#e6edf3];
 }
 
 .markdown-content h1 {
-  @apply text-3xl font-bold text-gray-900 mt-8 mb-4 pb-2 border-b border-gray-200;
+  @apply text-3xl font-bold text-gray-900 dark:text-[#e6edf3] mt-8 mb-4 pb-2 border-b border-gray-200 dark:border-[#30363d];
 }
 
 .markdown-content h2 {
-  @apply text-2xl font-semibold text-gray-900 mt-6 mb-3;
+  @apply text-2xl font-semibold text-gray-900 dark:text-[#e6edf3] mt-6 mb-3;
 }
 
 .markdown-content h3 {
-  @apply text-xl font-semibold text-gray-900 mt-5 mb-2;
+  @apply text-xl font-semibold text-gray-900 dark:text-[#e6edf3] mt-5 mb-2;
 }
 
 .markdown-content h4 {
-  @apply text-lg font-semibold text-gray-900 mt-4 mb-2;
+  @apply text-lg font-semibold text-gray-900 dark:text-[#e6edf3] mt-4 mb-2;
 }
 
 .markdown-content p {
@@ -40,39 +42,38 @@
 }
 
 .markdown-content blockquote {
-  @apply border-l-4 border-blue-500 pl-4 italic text-gray-600 bg-blue-50 py-2 my-4;
+  @apply border-l-4 border-blue-500 dark:border-[#58a6ff] pl-4 italic text-gray-600 dark:text-[#8d96a0] bg-blue-50 dark:bg-[#161b22] py-2 my-4;
 }
 
-.markdown-content code {
-  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono text-red-600;
-}
-
-.markdown-content pre {
-  @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4;
-}
-
-.markdown-content pre code {
-  @apply bg-transparent px-0 py-0 text-gray-100;
-}
+/* Inline code and code blocks are styled by MarkdownRenderers.tsx —
+   no bare `code` selector here, or it leaks into the syntax highlighter */
 
 .markdown-content table {
-  @apply w-full border-collapse border border-gray-300 mb-4;
+  @apply w-full border-collapse mb-4 text-sm border border-gray-200 dark:border-[#30363d];
 }
 
 .markdown-content th {
-  @apply border border-gray-300 bg-gray-100 px-4 py-2 font-semibold text-left;
+  @apply bg-gray-50 dark:bg-[#161b22] px-4 py-2.5 font-semibold text-left border-b-2 border-gray-300 dark:border-[#30363d] border-x border-x-gray-200 dark:border-x-[#30363d];
 }
 
 .markdown-content td {
-  @apply border border-gray-300 px-4 py-2;
+  @apply px-4 py-2.5 border border-gray-200 dark:border-[#21262d];
+}
+
+.markdown-content tbody tr:nth-child(even) {
+  @apply bg-gray-50 dark:bg-[#161b22];
+}
+
+.markdown-content tbody tr:hover {
+  @apply bg-blue-50/70 dark:bg-[#1c2433];
 }
 
 .markdown-content hr {
-  @apply border-0 border-t border-gray-300 my-8;
+  @apply border-0 border-t border-gray-300 dark:border-[#30363d] my-8;
 }
 
 .markdown-content a {
-  @apply text-blue-600 hover:text-blue-800 underline;
+  @apply text-blue-600 hover:text-blue-800 dark:text-[#58a6ff] dark:hover:text-[#79c0ff] underline;
 }
 
 .markdown-content strong {
@@ -97,11 +98,76 @@
   @apply mr-2;
 }
 
-/* Responsive textarea */
-textarea {
+/* CodeMirror editor */
+.cm-editor {
+  height: 100%;
+}
+
+.cm-editor .cm-content,
+.cm-editor .cm-gutters {
   font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  line-height: 1.5;
-  tab-size: 2;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cm-editor.cm-focused {
+  outline: none;
+}
+
+/* Focus mode: dim everything except the active line */
+.focus-mode .cm-line {
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+}
+
+.focus-mode .cm-line.cm-activeLine {
+  opacity: 1;
+}
+
+/* Print: show only the rendered preview */
+@media print {
+
+  html,
+  body,
+  #root,
+  #root>div {
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  .app-header,
+  .app-tabs,
+  .app-toolbar,
+  .app-statusbar,
+  .editor-pane,
+  .split-divider,
+  .outline-pane,
+  .preview-label {
+    display: none !important;
+  }
+
+  .app-container {
+    position: static !important;
+    height: auto !important;
+    overflow: visible !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .app-content {
+    display: block !important;
+    height: auto !important;
+  }
+
+  .preview-pane,
+  .preview-scroll {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
 }
 
 /* Scrollbar styling */
@@ -121,4 +187,16 @@ textarea {
 
 .overflow-auto::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
+}
+
+.dark .overflow-auto::-webkit-scrollbar-track {
+  background: #161b22;
+}
+
+.dark .overflow-auto::-webkit-scrollbar-thumb {
+  background: #484f58;
+}
+
+.dark .overflow-auto::-webkit-scrollbar-thumb:hover {
+  background: #58606a;
 }

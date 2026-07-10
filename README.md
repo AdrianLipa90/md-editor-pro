@@ -2,21 +2,25 @@
 
 A powerful, feature-rich markdown editor built with React, TypeScript, and Tailwind CSS. This editor provides a seamless writing experience with live preview, math equation support, and beautiful GitHub-inspired styling.
 
-🔗 **[Live Demo](https://endearing-frangollo-73728e.netlify.app/)**
+🔗 **[Live Demo](https://seehiong.github.io/md-editor-pro/)**
 
 ## ✨ Features
 
-- 📝 **Live Preview** - Switch between edit and preview modes instantly
+- 📝 **IDE-style Split View** - CodeMirror 6 editor with live preview side by side, draggable divider, bidirectional scroll sync
+- 🗂️ **Multiple Documents** - Tabbed editing, autosaved to your browser — nothing ever leaves your machine
+- 🧭 **Outline Pane** - Heading tree, click to jump anywhere in the document
+- 💾 **Real File Editing** - Open and save local .md files natively (Ctrl+S) via the File System Access API
 - 🧮 **Math Support** - Full LaTeX equation support via KaTeX
+- 🧜 **Mermaid Diagrams** - Flowcharts, sequence and class diagrams rendered in-browser (lazy-loaded)
 - 📋 **GitHub Flavored Markdown** - Tables, task lists, strikethrough, and more
-- 🎨 **Dark/Light Theme** - Automatic theme detection with beautiful styling
-- 📁 **File Operations** - Import and export markdown files
-- 📋 **Copy to Clipboard** - One-click copying of markdown content
-- 🖥️ **Fullscreen Mode** - Distraction-free writing experience
-- 📖 **Built-in Guide** - Comprehensive markdown syntax reference
-- 📊 **Real-time Stats** - Character, word, and line count
-- 📱 **Responsive Design** - Works perfectly on desktop and mobile
-- 🔧 **Easy Integration** - Drop into any React application
+- 🛠️ **Formatting Toolbar** - Plus keyboard shortcuts (Ctrl+B/I/K, Ctrl+F search)
+- 🖼️ **Image Paste** - Paste or drag-drop images straight into the editor as self-contained base64
+- 📤 **Export** - Standalone HTML file or print-to-PDF
+- ✨ **AI Assist (BYOK)** - Improve, proofread, summarize or continue writing with your own API key (OpenRouter, OpenAI, or local Ollama)
+- 🌙 **Dark/Light Theme** - Class-based theming with a toggle, follows your system by default
+- ✍️ **Focus & Typewriter Modes** - Distraction-free writing
+- 📴 **Offline PWA** - Installable as an app; works with no internet
+- 📊 **Real-time Stats** - Line/column, character, word, and line count
 
 ## 🚀 Quick Start
 
@@ -29,7 +33,7 @@ A powerful, feature-rich markdown editor built with React, TypeScript, and Tailw
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/seehiong/md-editor-pro.git
 cd markdown-editor-pro
 
 # Install dependencies
@@ -119,6 +123,7 @@ src/
 ├── components/
 │   ├── MarkdownEditor.tsx     # Main editor component
 │   ├── MarkdownGuide.tsx      # Interactive help guide
+│   ├── MarkdownRenderers.tsx  # Custom code block renderers
 │   └── MermaidDiagram.tsx     # Mermaid diagram support
 ├── App.tsx                    # Root component
 ├── main.tsx                   # Application entry point
@@ -218,7 +223,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have questions or need help integrating this editor:
 - Open an [issue](../../issues) for bugs or feature requests
-- Check out the [live demo](https://endearing-frangollo-73728e.netlify.app/) for examples
+- Check out the [live demo](https://seehiong.github.io/md-editor-pro/) for examples
 - Review the built-in help guide within the editor
 
 ---
